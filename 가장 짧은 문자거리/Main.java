@@ -3,34 +3,36 @@ import java.util.*;
 public class Main {
   public int[] solution(String str, char c) {
     int[] answer = new int[str.length()];
-    int distance1 = 101;
+    int distance = 101;
 
     char[] charArray = str.toCharArray();
 
     // Todo: 왼쪽에서 오른쪽으로
     for (int i = 0; i < charArray.length; i++) {
       if (charArray[i] == c) {
-        distance1 = 0;
-        answer[i] = distance1;
+        distance = 0;
+        answer[i] = distance;
       } else {
-        distance1++;
-        answer[i] = distance1;
+        distance++;
+        answer[i] = distance;
       }
     }
 
     // Todo: 오른쪽에서 왼쪽으로
-    int distance2 = 101;
+    distance = 101;
 
     for (int i = charArray.length - 1; i >= 0; i--) {
       if (charArray[i] == c) {
-        distance2 = 0;
-        answer[i] = distance2;
+        distance = 0;
+        // answer[i] = distance;
       } else {
-        distance2++;
-
-        if (answer[i] > distance2) {
-          answer[i] = distance2;
-        }
+        distance++;
+        /*
+         * if (answer[i] > distance) {
+         * answer[i] = distance;
+         * }
+         */
+        answer[i] = Math.min(answer[i], distance);
       }
     }
 
