@@ -4,7 +4,12 @@ public class Main {
   public String solution(int n, String str) {
     String answer = "";
 
-    System.out.println("this is int: " + n + "this is str: " + str);
+    for (int i = 0; i < n; i++) {
+      String targetString = str.substring(0, 7).replace("#", "1").replace("*", "0");
+      str = str.substring(7);
+      int num = Integer.parseInt(targetString, 2);
+      answer += (char) num;
+    }
 
     return answer;
   }
