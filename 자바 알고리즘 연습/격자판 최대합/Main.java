@@ -3,43 +3,26 @@ import java.util.*;
 public class Main {
   public int solution(int n, int[][] arr) {
     int answer = 0;
-    int temp = 0;
+    int sum1 = 0;
+    int sum2 = 0;
 
-    for (int i = 0; i < arr.length; i++) {
-      for (int j = 0; j < arr[i].length; j++) {
-        temp += arr[i][j];
+    for (int i = 0; i < n; i++) {
+      sum1 = sum2 = 0;
+      for (int j = 0; j < n; j++) {
+        sum1 += arr[i][j];
+        sum2 += arr[j][i];
       }
-      if (temp > answer) {
-        answer = temp;
-      }
-      temp = 0;
-    }
-
-    for (int i = 0; i < arr.length; i++) {
-      for (int j = 0; j < arr[i].length; j++) {
-        temp += arr[j][i];
-      }
-      if (temp > answer) {
-        answer = temp;
-      }
-      temp = 0;
+      answer = Math.max(answer, sum1);
+      answer = Math.max(answer, sum2);
     }
 
-    for (int i = 0; i < arr.length; i++) {
-      temp += arr[i][i];
+    sum1 = sum2 = 0;
+    for (int i = 0; i < n; i++) {
+      sum1 += arr[i][i];
+      sum2 += arr[i][n - i - 1];
     }
-    if (temp > answer) {
-      answer = temp;
-    }
-    temp = 0;
-
-    for (int i = arr.length - 1; i >= 0; i--) {
-      temp += arr[i][i];
-    }
-    if (temp > answer) {
-      answer = temp;
-    }
-    temp = 0;
+    answer = Math.max(answer, sum1);
+    answer = Math.max(answer, sum2);
 
     return answer;
   }
@@ -48,16 +31,14 @@ public class Main {
     Main T = new Main();
     Scanner kb = new Scanner(System.in);
     int n = kb.nextInt();
-    int[][] arr2 = new int[n][n];
+    int[][] arr = new int[n][n];
 
     for (int i = 0; i < n; i++) {
-      int[] arr = new int[n];
       for (int j = 0; j < n; j++) {
-        arr[j] = kb.nextInt();
+        arr[i][j] = kb.nextInt();
       }
-      arr2[i] = arr;
     }
     kb.close();
-    System.out.println(T.solution(n, arr2));
+    System.out.println(T.solution(n, arr));
   }
 }
