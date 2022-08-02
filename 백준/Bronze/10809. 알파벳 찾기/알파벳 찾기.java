@@ -23,8 +23,9 @@ public class Main {
     }
 
     for (int x : arr) {
-      System.out.print(x + " ");
+      sb.append(x + " ");
     }
 
+    System.out.println(sb);
   }
 }
